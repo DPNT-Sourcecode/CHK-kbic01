@@ -50,33 +50,33 @@ class CheckoutSolution:
     #  - The policy of the supermarket is to always favor the customer when applying special offers.
     #  - Offers involving multiple items always give a better discount than offers containing fewer items. ????
 
-    # ------+-------+------------------------+
-    # | A    | 50    | 3A for 130, 5A for 200 |
-    # | B    | 30    | 2B for 45              |
-    # | C    | 20    |                        |
-    # | D    | 15    |                        |
-    # | E    | 40    | 2E get one B free      |
-    # | F    | 10    | 2F get one F free      |
-    # | G    | 20    |                        |
-    # | H    | 10    | 5H for 45, 10H for 80  |
-    # | I    | 35    |                        |
-    # | J    | 60    |                        |
-    # | K    | 80    | 2K for 150             |
-    # | L    | 90    |                        |
-    # | M    | 15    |                        |
-    # | N    | 40    | 3N get one M free      |
-    # | O    | 10    |                        |
-    # | P    | 50    | 5P for 200             |
-    # | Q    | 30    | 3Q for 80              |
-    # | R    | 50    | 3R get one Q free      |
-    # | S    | 30    |                        |
-    # | T    | 20    |                        |
-    # | U    | 40    | 3U get one U free      |
-    # | V    | 50    | 2V for 90, 3V for 130  |
-    # | W    | 20    |                        |
-    # | X    | 90    |                        |
-    # | Y    | 10    |                        |
-    # | Z    | 50    |                        |
+    # +------+-------+---------------------------------+
+    # | A    | 50    | 3A for 130, 5A for 200          |
+    # | B    | 30    | 2B for 45                       |
+    # | C    | 20    |                                 |
+    # | D    | 15    |                                 |
+    # | E    | 40    | 2E get one B free               |
+    # | F    | 10    | 2F get one F free               |
+    # | G    | 20    |                                 |
+    # | H    | 10    | 5H for 45, 10H for 80           |
+    # | I    | 35    |                                 |
+    # | J    | 60    |                                 |
+    # | K    | 70    | 2K for 120                      |
+    # | L    | 90    |                                 |
+    # | M    | 15    |                                 |
+    # | N    | 40    | 3N get one M free               |
+    # | O    | 10    |                                 |
+    # | P    | 50    | 5P for 200                      |
+    # | Q    | 30    | 3Q for 80                       |
+    # | R    | 50    | 3R get one Q free               |
+    # | S    | 20    | buy any 3 of (S,T,X,Y,Z) for 45 |
+    # | T    | 20    | buy any 3 of (S,T,X,Y,Z) for 45 |
+    # | U    | 40    | 3U get one U free               |
+    # | V    | 50    | 2V for 90, 3V for 130           |
+    # | W    | 20    |                                 |
+    # | X    | 17    | buy any 3 of (S,T,X,Y,Z) for 45 |
+    # | Y    | 20    | buy any 3 of (S,T,X,Y,Z) for 45 |
+    # | Z    | 21    | buy any 3 of (S,T,X,Y,Z) for 45 |
     # +------+-------+------------------------+
     def __init__(self):
         product_b = Product("B", 30, [Offer(2, 45)])
@@ -88,6 +88,14 @@ class CheckoutSolution:
         product_y = Product("Y", 20)
         product_z = Product("Z", 21)
         avaliable_products_list = [
+            # +------+-------+---------------------------------+
+            # | A    | 50    | 3A for 130, 5A for 200          |
+            # | B    | 30    | 2B for 45                       |
+            # | C    | 20    |                                 |
+            # | D    | 15    |                                 |
+            # | E    | 40    | 2E get one B free               |
+            # | F    | 10    | 2F get one F free               |
+            # | G    | 20    |                                 |
             Product("A", 50, [Offer(5, 200), Offer(3, 130)]),
             product_b,
             Product("C", 20),
@@ -97,44 +105,43 @@ class CheckoutSolution:
             ),
             Product("F", 10, [Offer(3, 20)]),
             Product("G", 20),
-            # | H    | 10    | 5H for 45, 10H for 80  |
-            # | I    | 35    |                        |
-            # | J    | 60    |                        |
-            # | K    | 80    | 2K for 150             |
-            # | L    | 90    |                        |
-            # | M    | 15    |                        |
+            # | H    | 10    | 5H for 45, 10H for 80           |
+            # | I    | 35    |                                 |
+            # | J    | 60    |                                 |
+            # | K    | 70    | 2K for 120                      |
+            # | L    | 90    |                                 |
             Product("H", 10, [Offer(5, 45), Offer(10, 80)]),
             Product("I", 35),
             Product("J", 60),
-            Product("K", 80, [Offer(2, 150)]),
+            Product("K", 70, [Offer(2, 120)]),
             Product("L", 90),
             product_m,
-            # | N    | 40    | 3N get one M free      |
-            # | O    | 10    |                        |
+            # | N    | 40    | 3N get one M free               |
+            # | O    | 10    |                                 |
+            # | P    | 50    | 5P for 200                      |
+            # | Q    | 30    | 3Q for 80                       |
+            # | R    | 50    | 3R get one Q free               |
             Product("N", 40, [], BuyXGetYFreeOffer("N", 3, product_m)),
             Product("O", 10),
-            # | P    | 50    | 5P for 200             |
-            # | Q    | 30    | 3Q for 80              |
-            # | R    | 50    | 3R get one Q free      |
             Product("P", 50, [Offer(5, 200)]),
             product_q,
             Product("R", 50, [], BuyXGetYFreeOffer("R", 3, product_q)),
-            # | S    | 30    |                        |
-            # | T    | 20    |                        |
-            Product("S", 30),
-            Product("T", 20),
-            # | U    | 40    | 3U get one U free      |
-            # | V    | 50    | 2V for 90, 3V for 130  |
+            # | S    | 20    | buy any 3 of (S,T,X,Y,Z) for 45 |
+            # | T    | 20    | buy any 3 of (S,T,X,Y,Z) for 45 |
+            # | U    | 40    | 3U get one U free               |
+            # | V    | 50    | 2V for 90, 3V for 130           |
+            product_s,
+            product_t,
             Product("U", 40, [Offer(4, 120)]),
             Product("V", 50, [Offer(2, 90), Offer(3, 130)]),
             # | W    | 20    |                        |
-            # | X    | 90    |                        |
-            # | Y    | 10    |                        |
-            # | Z    | 50    |                        |
+            # | X    | 17    | buy any 3 of (S,T,X,Y,Z) for 45 |
+            # | Y    | 20    | buy any 3 of (S,T,X,Y,Z) for 45 |
+            # | Z    | 21    | buy any 3 of (S,T,X,Y,Z) for 45 |
             Product("W", 20),
-            Product("X", 90),
-            Product("Y", 10),
-            Product("Z", 50),
+            product_x,
+            product_y,
+            product_z,
         ]
         self.avaliable_products_map = {
             product.name: product for product in avaliable_products_list
@@ -168,8 +175,9 @@ class CheckoutSolution:
         self.basket = basket
 
         self.apply_free_offers()
-        self.apply_group_offers()
-        return sum(
+        total = 0
+        total += self.apply_group_offers()
+        total += sum(
             [
                 self.apply_offers(
                     self.avaliable_products_map[product_name], basket[product_name]
@@ -177,6 +185,7 @@ class CheckoutSolution:
                 for product_name in basket
             ]
         )
+        return total
 
     # total for `number_of_products` number of the same prodcut in basket after offer has been applied
     def apply_offers(self, product: Product, number_of_products: int):
@@ -216,8 +225,7 @@ class CheckoutSolution:
             self.basket[target_product_name] = target_product_amount
 
     def apply_group_offers(self):
-        for offer in self.group_offers:
-            self.apply_group_offer(offer)
+        return sum([self.apply_group_offer(offer) for offer in self.group_offers])
 
     def apply_group_offer(self, offer: GroupOffer):
         offer_products_in_basket = {
@@ -228,14 +236,16 @@ class CheckoutSolution:
         #     [product_amount for _, product_amount in offer_products_in_basket.items()]
         # )
         total_offer_price = 0
-        batch_count = 0
-        batch_price = 0
+        # batch_price = 0
         index = 0
         items_missing = 0
-        while items_missing == 0:
+        while items_missing == 0 and index < len(offer.products):
+            # print(index)
+            batch_count = 0
             items_missing = offer.number_of_products - batch_count
             items_to_take = defaultdict(int)
             while index < len(offer.products) and items_missing > 0:
+                # print(index)
                 # greedy - take most expensive products while available
                 current_product = offer.products[index]
                 items_available = offer_products_in_basket[current_product.name]
@@ -244,21 +254,30 @@ class CheckoutSolution:
                 batch_count += take_items
                 offer_products_in_basket[current_product.name] -= take_items
                 items_missing = offer.number_of_products - batch_count
-                items_to_take[current_product.name] = take_items
+                if take_items > 0:
+                    items_to_take[current_product.name] = take_items
                 if take_items == 0:
                     index += 1
+                    # print(index)
+                # else:
+                # print("====", items_missing)
             if items_missing == 0:
                 # enough for batch
-                for take_name, take_amount in items_to_take:
-                    offer_products_in_basket[take_name] -= take_amount
-                    # suboptimal lookup but faster to implement for now
-                    batch_price += (
-                        take_amount * self.avaliable_products_map[take_name].price
-                    )
-                total_offer_price += batch_price
-        # update basket
-        for name, amount in offer_products_in_basket.items():
-            self.basket[name] = amount
+
+                for take_name, take_amount in items_to_take.items():
+                    self.basket[take_name] -= take_amount
+                    # # suboptimal lookup but faster to implement for now
+                    # batch_price += (
+                    #     take_amount * self.avaliable_products_map[take_name].price
+                    # )
+                total_offer_price += offer.total
+
+        # # update basket
+        # for name, amount in offer_products_in_basket.items():
+        #     print(name, amount)
+        #     self.basket[name] = amount
+        # print(self.basket)
+
         return total_offer_price
 
 
@@ -286,4 +305,8 @@ if __name__ == "__main__":
     print(CheckoutSolution().checkout("FFFF"))  # 30
     print(CheckoutSolution().checkout("PPPPP"))  # 200
     print(CheckoutSolution().checkout("VVVVV"))  # 220
-    print(CheckoutSolution().checkout("N"))
+    print()
+    print(CheckoutSolution().checkout("SSSSS"))  # 45 + 40 = 85
+    print(CheckoutSolution().checkout("STXYZ"))  # 45 + 17 + 20 = 82
+    print(CheckoutSolution().checkout("XXXZ"))  # 45 + 17 = 62
+    # print(CheckoutSolution().checkout("N"))
